@@ -12,6 +12,8 @@ messageRouter.get("/users", protect, getUserForSidebar);
 
 messageRouter.get("/:_id", protect, getMessages);
 
+messageRouter.get("/test",getMessages);
+
 messageRouter.post("/send/:_id", protect, sendMessage);
 
 export default messageRouter;
