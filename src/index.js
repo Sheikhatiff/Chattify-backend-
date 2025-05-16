@@ -8,6 +8,7 @@ import { connectDB } from "./lib/db.js";
 import authRouter from "./routes/auth.route.js";
 import messageRouter from "./routes/message.route.js";
 import { app, server } from "./lib/socket.js";
+import Message from "./models/message.model.js";
 
 dotenv.config({ path: path.resolve(process.cwd(), "config.env") });
 
@@ -22,7 +23,12 @@ app.use(cookieParser());
 app.use("/api/auth", authRouter);
 app.use("/api/messages", messageRouter);
 //just for testing
-app.get("/api",(req,res)=>{res.status(200).json({message:"Hello from Backend"})});
+app.get("/api", async (req, res) => {
+  const messages = await Message.find();
+  res
+    .status(200)
+    .json({ message: "Hello from Backend", backendMessages: messages });
+});
 
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
