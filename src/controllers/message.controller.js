@@ -66,3 +66,13 @@ export const sendMessage = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+//just for testing purposes
+export const getAllMessages = async (req, res) => {
+  try {
+    const messages = await Message.find();
+    res.status(200).json(messages);
+  } catch (err) {
+    console.log(`Error in getMessages: ${err.message}`);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
