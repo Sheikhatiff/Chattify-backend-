@@ -24,7 +24,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/messages", messageRouter);
 //just for testing
 app.get("/api", async (req, res) => {
-  const messages = await Message.find();
+  const messages = await Message.findById("682744048000456682dce240");
   res
     .status(200)
     .json({ message: "Hello from Backend", backendMessages: messages });
